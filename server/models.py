@@ -1,17 +1,21 @@
 from flask_sqlalchemy import SQLAlchemy
 from uuid import uuid4
 
+def create_id():
+	return uuid4().hex
+
 db = SQLAlchemy()
 
-def create_id():
-    return uuid4().hex
-
 class Users(db.Model):
-    id = db.Column(db.String(32), unique = True, primary_key = True, default = create_id)
-    user_name = db.Column(db.String(200), nullable = False)
-    user_email = db.Column(db.String(345), unique = True, nullable = False)
-    user_pass = db.Column(db.String(345))
+	id = db.Column(db.String(32), primary_key = True, unique = True, default = create_id)
+	user_name = db.Column(db.String(40))
+	user_email = db.Column(db.String(345), unique= True, nullable = False)
+	user_pass = db.Column(db.String(50), unique = True, nullable = False)
 
-    def __init__(self, name, email):
-        self.user_name = name
-        self.user_email = email
+	def __init__(self, email, pass_w):
+		self.user_pass = pass_w
+		self.user_email = email
+
+
+
+
