@@ -7,7 +7,7 @@ from datetime import timedelta
 app = Flask(__name__)
 app.config.from_object(AppConfig)
 app.secret_key = "@#$@#$@#$"
-app.permanent_session_lifetime = timedelta(minutes=4)
+app.permanent_session_lifetime = timedelta(seconds=14)
 root_route(app)
 
 if __name__ == "__main__":

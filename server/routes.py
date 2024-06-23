@@ -10,8 +10,16 @@ def root_route(app):
 
     @app.route("/")
     def home():
-        print(session.get("id"), 'THis id ')
         return "<h1>Oi! Oi! this is the home page</h1>"
+    
+    @app.route("/show")
+    def show_user():
+        user_in = session.get("id")
+
+        if user_in:
+            return {"msg" : "User is logged in" }
+        else:
+            return {"msg" : "User is not logged in"}
     
     @app.route("/api/create_user", methods= ['POST'])
     def create_user():
