@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "poppins";
+    src: url("./assets/Poppins-Regular.ttf");
+}
+
+.poppins {
+    font-family:"poppins";
+}
+
+.linear {
+    background-image: linear-gradient(to right top, steelblue, white);
+}
