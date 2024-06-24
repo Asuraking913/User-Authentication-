@@ -8,6 +8,7 @@ function Login() {
     const [userName, setUserName] = useState("")
     const [userPassword, setUserPass] = useState("")
     const [msg, setMsg] = useState(false)
+    const [newData, setNewData] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -25,7 +26,19 @@ function Login() {
             return
         }
         setMsg("")
-        const resp  = await axios.post("http://127.0.0.1:2000/api/login", data).then(resp => console.log(resp.data))
+        const resp  = await axios.post("http://127.0.0.1:2000/api/login", data).then(resp => {
+            if(resp.data['msg'] == "User logged In") {
+                localStorage.setItem("User", resp.data['user'])
+                window.location.href = "/"
+                return
+            }
+            else {
+                setMsg(resp.data['msg'])
+                setInterval(() => {
+                    setMsg("")
+                }, 4000)
+            }
+        })
     }
 
   return (

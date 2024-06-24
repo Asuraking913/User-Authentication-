@@ -2,12 +2,14 @@ import React from 'react'
 import Nav from '../components /nav'
 import { useState } from 'react'
 import axios from 'axios'
+// 08054631927
 
 function Reg() {
 
     const [userName, setUserName] = useState("")
     const [userPassword, setUserPass] = useState("")
     const [userEmail, setUserEmail] = useState("")
+    const [msg, setMsg] = useState("")
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -16,7 +18,16 @@ function Reg() {
             "email" : userEmail, 
             "pass" : userPassword
         }
-        const resp = await axios.post("http://127.0.0.1:2000/api/register", data).then(resp => console.log(resp.data))
+        const resp = await axios.post("http://127.0.0.1:2000/api/register", data).then(resp => {
+            if (resp.data['msg'] == "Created User")   
+            {window.location.href = "/login" }
+            else {
+                setMsg(resp.data['msg'])
+                setInterval(() => {
+                    setMsg("")
+                }, 4000)
+            }
+        })
     }
 
   return (
@@ -24,6 +35,8 @@ function Reg() {
         <div className='bg-blue-100 h-screen flex items-center justify-center  linear flex-col'>
         <Nav />
         <h1 className='poppins capitalize text-blue-950 text-[1.5rem] font-bold mb-[1em]'>Create an Account</h1>
+
+        {msg && <p className='text-blue-950 animate-bounce'>{msg}</p>}
 
         <div className='bg-white h-[auto]  rounded-[1em] shadow-lg shadow-blue-600 '>
             <form action="#" onSubmit={handleSubmit}>
@@ -46,7 +59,7 @@ function Reg() {
                         <input onChange={e => setUserPass(e.target.value)} placeholder='Enter your password' className='w-full focus:outline-blue-600 rounded-[5px] border-blue-300 border-[1px] p-[.2em] poppins' type="password" name="pass" id="pass" />
                     </p>
                     <p className='poppins text-blue-600'>Forgot Password?</p>
-                    <button type="submit" className='bg-blue-600 p-[1em] py-[.7em] w-full text-white poppins font-bold rounded-[5px]' >Login</button>
+                    <button type="submit" className='bg-blue-600 p-[1em] py-[.7em] w-full text-white poppins font-bold rounded-[5px]' >Sign Up</button>
                 </div>
             </form>
         </div>

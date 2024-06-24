@@ -33,6 +33,10 @@ def root_route(app):
 				return {
 					"msg": "User Name Already exists"
 				}
+			if users.user_email == useremail:
+				return {
+					"msg": "Email Address Already exists"
+				}
 		new_user = Users(username, userpass)
 		db.session.add(new_user)
 		db.session.commit()
@@ -48,18 +52,23 @@ def root_route(app):
 		username = request.json['user']
 		userpass = request.json['pass']
 		
-		found_users = Users.query.all()
-		for users in found_users:
-			if users.user_name == username:
-				if hasher.check_password_hash(users.user_pass, userpass):
-					return {
-						"msg" : "User is logged in"
-					}
+		found_users = Users.query.filter_by(user_name = username)
+		if found_users:
+			for users in found_users:
+				if users.user_name == username:
+					if hasher.check_password_hash(users.user_pass, userpass):
+						return {
+							"msg" : "User logged In", 
+							"user" : users.user_name
+						}
+					else:
+						return {
+							"msg" : "Incorrect password"
+						}
 				else:
 					return {
-						"msg" : "Incorrect password"
+							"msg" : "Incorrect username "
 					}
-			else:
-				return {
-						"msg" : "Incorrect email address"
-					}
+		return {
+			"msg" : "Username does not exist"
+		}
