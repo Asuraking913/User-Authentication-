@@ -1,49 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Nav from '../components /nav'
+import { useState } from 'react'
 import axios from 'axios'
 
-
-function Login() {
+function Reg() {
 
     const [userName, setUserName] = useState("")
     const [userPassword, setUserPass] = useState("")
-    const [msg, setMsg] = useState(false)
+    const [userEmail, setUserEmail] = useState("")
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         let data = {
             "user" : userName, 
+            "email" : userEmail, 
             "pass" : userPassword
         }
-
-        if (data['user'].length < 5 || data['pass'].length <  5) {
-
-            setMsg("Characters length should be more than five")
-            setInterval(() => {
-                setMsg("")
-            }, 4000)
-            return
-        }
-        setMsg("")
-        const resp  = await axios.post("http://127.0.0.1:2000/api/login", data).then(resp => console.log(resp.data))
+        const resp = await axios.post("http://127.0.0.1:2000/api/register", data).then(resp => console.log(resp.data))
     }
 
   return (
-    <div className='bg-blue-100 h-screen flex items-center justify-center  linear flex-col'>
+    <div>
+        <div className='bg-blue-100 h-screen flex items-center justify-center  linear flex-col'>
         <Nav />
-        <h1 className='poppins capitalize text-center text-blue-950 text-[1.5rem] font-bold mb-[1em]'>Log Into your account</h1>
-        {msg && <p className='animate-bounce'>{msg}</p>}
+        <h1 className='poppins capitalize text-blue-950 text-[1.5rem] font-bold mb-[1em]'>Create an Account</h1>
+
         <div className='bg-white h-[auto]  rounded-[1em] shadow-lg shadow-blue-600 '>
             <form action="#" onSubmit={handleSubmit}>
                 <div className='h-[50px] ml-[1em] mt-[1em] w-[50px] bg-blue-600 rounded-[.5em]'></div>
                 <div className='p-[1em] flex flex-col gap-[0.5em] backdrop-blur-md'>
-                    <h1 className='text-3xl font-bold poppins text-blue-950'>Welcome back</h1>
-                    <h3 className='poppins text-[1rem] text-blue-600'>Let's  explore the app again with us.</h3>
+                    <h2 className='text-3xl font-bold poppins text-blue-950'>Fill In your details</h2>
+                    <h3 className='poppins text-[1rem] text-blue-600'>create an account</h3>
                 </div>
                 <div className='p-[1em] bg-blue-100 m-[0.5em] flex flex-col gap-[1em] rounded-xl'>
                     <p className='flex gap-[.5em] flex-col'>
                         <label className='poppins text-[1rem] font-semibold' htmlFor="username">Username</label>
                         <input onChange={e => setUserName(e.target.value)} placeholder='Enter your user name' className='w-full focus:outline-blue-600 rounded-[5px] border-blue-300 border-[1px] p-[.2em] poppins' type="text" name="username" id="username" />
+                    </p>
+                    <p className='flex gap-[.5em] flex-col'>
+                        <label className='poppins text-[1rem] font-semibold' htmlFor="username">Email</label>
+                        <input onChange={e => setUserEmail(e.target.value)} placeholder='Enter your user email' className='w-full focus:outline-blue-600 rounded-[5px] border-blue-300 border-[1px] p-[.2em] poppins' type="email" name="useremail" id="useremail" />
                     </p>
                     <p className='flex gap-[.5em] flex-col'>
                         <label className='poppins text-[1rem] font-semibold' htmlFor="Password">Password</label>
@@ -55,7 +51,8 @@ function Login() {
             </form>
         </div>
     </div>
+    </div>
   )
 }
 
-export default Login
+export default Reg

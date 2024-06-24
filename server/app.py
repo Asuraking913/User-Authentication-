@@ -2,8 +2,10 @@ from flask import Flask
 from routes import root_route
 from models import db
 from config import Appconfig
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app, cross_origin = "*")
 app.config.from_object(Appconfig)
 root_route(app)
 

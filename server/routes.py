@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, json
 from models import db, Users
 from flask_bcrypt import Bcrypt
 
@@ -29,14 +29,14 @@ def root_route(app):
 		userpass = hasher.generate_password_hash(userpass)
 		found_user = Users.query.all()
 		for users in found_user:
-			if users.user_email == useremail:
+			if users.user_name == username:
 				return {
-					"msg": "Email Address Already exists"
+					"msg": "User Name Already exists"
 				}
-		new_user = Users(useremail, userpass)
+		new_user = Users(username, userpass)
 		db.session.add(new_user)
 		db.session.commit()
-		new_user.user_name = username
+		new_user.user_email = useremail
 		db.session.commit()
 
 		return {
@@ -46,12 +46,11 @@ def root_route(app):
 	@app.route("/api/login", methods = ['POST'])
 	def login():
 		username = request.json['user']
-		useremail = request.json['email']
 		userpass = request.json['pass']
 		
 		found_users = Users.query.all()
 		for users in found_users:
-			if users.user_email == useremail:
+			if users.user_name == username:
 				if hasher.check_password_hash(users.user_pass, userpass):
 					return {
 						"msg" : "User is logged in"
