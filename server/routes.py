@@ -12,15 +12,11 @@ def root_route(app):
 	
 	@app.route("/api/show", methods = ['POST'])
 	def show(): 
-		# print(request.json['user'])
 		found_user = Users.query.filter_by(user_name = request.json['user']).first()
-		print(found_user, "hewrwe")
 		return {
 			"name": found_user.user_name,
 			"email" : found_user.user_email, 
-			"id" : found_user.id
 		}
-		# return "sdf"
 			
 
 	@app.route("/api/register", methods = ['POST'])
