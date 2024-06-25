@@ -37,7 +37,13 @@ function Login() {
     }
 
     catch (error) {
-        console.log(error.response.status)
+        if (error.response.status === 401) {
+            setMsg(error.response.data['msg'])
+            setInterval(() => {
+            setMsg("")
+
+            }, 4000)
+        }
     }
     }
 

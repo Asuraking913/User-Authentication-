@@ -65,12 +65,10 @@ def root_route(app):
 	def login():
 
 		user_id = session.get("id")
-		print(user_id)
 		if user_id:
 			response = jsonify({
 				"msg" : "User is already logged"
 			}), 401
-			# response.set_cookie('usr_id', f'{user_id}')
 			return response
 
 

@@ -10,7 +10,8 @@ export default defineConfig({
       "/api/login" : "http://127.0.0.1:2000",
       "/get_user" : "http://127.0.0.1:2000",
       "/api/show" : "http://127.0.0.1:2000",
-      "/api/logout" : "http://127.0.0.1:2000"
+      "/api/logout" : "http://127.0.0.1:2000",
+      "/api/register" : "http://127.0.0.1:2000"
     }
   }
 })

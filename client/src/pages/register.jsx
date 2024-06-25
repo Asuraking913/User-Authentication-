@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from '../components /nav'
 import { useState } from 'react'
 import axios from 'axios'
-// 08054631927
+import Axios from '../components /axios'
 
 function Reg() {
 
@@ -18,15 +18,8 @@ function Reg() {
             "email" : userEmail, 
             "pass" : userPassword
         }
-        const resp = await axios.post("http://127.0.0.1:2000/api/register", data).then(resp => {
-            if (resp.data['msg'] == "Created User")   
-            {window.location.href = "/login" }
-            else {
-                setMsg(resp.data['msg'])
-                setInterval(() => {
-                    setMsg("")
-                }, 4000)
-            }
+        const resp = await Axios.post("/api/register", data).then(resp => {
+            console.log(resp.data)
         })
     }
 
