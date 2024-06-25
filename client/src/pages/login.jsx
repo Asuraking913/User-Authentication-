@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components /nav'
-import axios from 'axios'
+// import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Axios from '../components /axios'
 
 
 function Login() {
@@ -27,18 +28,19 @@ function Login() {
             return
         }
         setMsg("")
-        const resp  = await axios.post("http://127.0.0.1:2000/api/login", data).then(resp => {
-            if(resp.data['msg'] == "User logged In") {
-                localStorage.setItem("User", resp.data['user'])
-                window.location.href = "/"
-                return
-            }
-            else {
-                setMsg(resp.data['msg'])
-                setInterval(() => {
-                    setMsg("")
-                }, 4000)
-            }
+        const resp  = await Axios.post("http://127.0.0.1:2000/api/login", data).then(resp => {
+            // if(resp.data['msg'] == "User logged In") {
+            //     localStorage.setItem("User", resp.data['user'])
+            //     window.location.href = "/"
+            //     return
+            // }
+            // else {
+            //     setMsg(resp.data['msg'])
+            //     setInterval(() => {
+            //         setMsg("")
+            //     }, 4000)
+            // }
+            console.log(resp.data)
         })
     }
 
