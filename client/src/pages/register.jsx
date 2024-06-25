@@ -18,9 +18,20 @@ function Reg() {
             "email" : userEmail, 
             "pass" : userPassword
         }
+        try {
         const resp = await Axios.post("/api/register", data).then(resp => {
-            console.log(resp.data)
+            if (resp.status == 200) {
+                window.location.href = "/login"
+            }
         })
+    }
+
+    catch (error) {
+        setMsg(error.response.data['msg'])
+        setInterval(() => {
+            setMsg("")
+        }, 4000)
+    }
     }
 
   return (

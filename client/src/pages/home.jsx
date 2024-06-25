@@ -8,7 +8,17 @@ function Home() {
   const [msg, setMsg] = useState(false )
 
   const handleInfo = async () => {
-    const resp = Axios.get("/get_user").then(resp =>setUser(resp.data['user']))
+    const resp = Axios.get("/get_user").then(resp => {
+      if (resp.status == 200) {
+        setUser(resp.data['user'])
+      }
+    }).catch(error => {
+      if (error.response.status == 401) {
+        window.location.href = "/login"
+      }
+    })
+
+    
   }
 
   useEffect(() => {

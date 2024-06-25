@@ -11,6 +11,10 @@ function View() {
     const handleUser = async () => {
         const resp = await axios.get("/api/show").then(resp => {
             setData(resp.data)
+        }).catch(error => {
+            if (error.response.status == 401) {
+                window.location.href = "/login"
+            }
         })
     }
 

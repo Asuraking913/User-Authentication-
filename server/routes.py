@@ -26,13 +26,15 @@ def root_route(app):
 	
 	@app.route("/get_user")
 	def get_user():
-		user_id = session.get('id')
-		print(session['id'])
-		if user_id:
-			found_user = Users.query.filter_by(id = user_id).first()
-			return {
-				"user" : found_user.user_name,
-			}
+		try:
+			user_id = session.get('id')
+			if user_id:
+				found_user = Users.query.filter_by(id = user_id).first()
+				return {
+					"user" : found_user.user_name,
+				}
+		except:
+			pass
 		return {"msg" :"No User"}, 401
 
 	@app.route("/api/register", methods = ['POST'])
@@ -46,11 +48,11 @@ def root_route(app):
 			if users.user_name == username:
 				return {
 					"msg": "User Name Already exists"
-				}
+				}, 409
 			if users.user_email == useremail:
 				return {
 					"msg": "Email Address Already exists"
-				}
+				}, 409
 		new_user = Users(username, userpass)
 		db.session.add(new_user)
 		db.session.commit()
@@ -59,7 +61,7 @@ def root_route(app):
 
 		return {
 			"msg" : "Created User"
-		}
+		}, 200
 	
 	@app.route("/api/login", methods = ['POST'])
 	def login():
