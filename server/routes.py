@@ -93,3 +93,8 @@ def root_route(app):
 		return {
 			"msg" : "Incorrect Username"
 		}, 401
+	
+	@app.route("/api/logout")
+	def logout():
+		session.pop("id", None)
+		return "Usr Logged Out"

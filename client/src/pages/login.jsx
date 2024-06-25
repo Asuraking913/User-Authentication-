@@ -29,7 +29,7 @@ function Login() {
         }
         setMsg("")
         try {
-        const resp  = await Axios.post("api/login", data).then(resp => {
+        const resp  = await Axios.post("/api/login", data).then(resp => {
             if (resp.status == 200) {
                 window.location.href = "/"  
             }

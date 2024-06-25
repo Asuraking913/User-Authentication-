@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Axios from './axios'
 
 function Nav({loginLink, signLink}) {
 
-    const handleLogout = () => {
-        window.location.href = "/login"
+    const handleLogout = (event) => {
+        event.preventDefault()
+        const resp = Axios.get("/api/logout").then(resp => console.log(resp.data))
+        window.location.href = "/login"  
     }
     
   return (
