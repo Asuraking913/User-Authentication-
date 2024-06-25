@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 function Nav({loginLink, signLink}) {
 
     const handleLogout = () => {
-        localStorage.clear()
         window.location.href = "/login"
     }
     

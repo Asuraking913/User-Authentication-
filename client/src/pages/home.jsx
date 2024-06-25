@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components /nav'
+import Axios from '../components /axios'
 
 function Home() {
 
   const [user, setUser] = useState(false)
   const [msg, setMsg] = useState(false )
 
+  const handleInfo = async () => {
+    const resp = Axios.get("/get_user").then(resp =>setUser(resp.data['user']))
+  }
+
   useEffect(() => {
-    setUser(localStorage.getItem("User"))
+    handleInfo()
   }, [])
   
   return (

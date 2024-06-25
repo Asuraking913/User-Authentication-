@@ -28,20 +28,17 @@ function Login() {
             return
         }
         setMsg("")
-        const resp  = await Axios.post("http://127.0.0.1:2000/api/login", data).then(resp => {
-            // if(resp.data['msg'] == "User logged In") {
-            //     localStorage.setItem("User", resp.data['user'])
-            //     window.location.href = "/"
-            //     return
-            // }
-            // else {
-            //     setMsg(resp.data['msg'])
-            //     setInterval(() => {
-            //         setMsg("")
-            //     }, 4000)
-            // }
-            console.log(resp.data)
+        try {
+        const resp  = await Axios.post("api/login", data).then(resp => {
+            if (resp.status == 200) {
+                window.location.href = "/"  
+            }
         })
+    }
+
+    catch (error) {
+        console.log(error.response.status)
+    }
     }
 
   return (

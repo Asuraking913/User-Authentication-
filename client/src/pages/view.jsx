@@ -9,20 +9,19 @@ function View() {
     
 
     const handleUser = async () => {
-        const resp = await axios.post("http://127.0.0.1:2000/api/show", {"user": localStorage.getItem("User")}).then(resp => {
+        const resp = await axios.get("/api/show").then(resp => {
             setData(resp.data)
         })
     }
 
 
     useEffect(() => {
-    setUser(localStorage.getItem("User"))
     handleUser()
     }, [])
 
   return (
     <div className='h-screen linear flex items-center justify-center flex-col gap-[2em]'>
-        <Nav loginLink={"/login"} signLink={"/register"}/>
+        <Nav loginLink={"/"} signLink={"/"}/>
 
         {user && <h1 className='text-4xl text-blue-950 font-bold'>User: {user}</h1>}
 
