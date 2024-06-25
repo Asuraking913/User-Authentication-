@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components /nav'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 function Login() {
@@ -43,7 +44,7 @@ function Login() {
 
   return (
     <div className='bg-blue-100 h-screen flex items-center justify-center  linear flex-col'>
-        <Nav />
+        {/* <Nav /> */}
         <h1 className='poppins capitalize text-center text-blue-950 text-[1.5rem] font-bold mb-[1em]'>Log Into your account</h1>
         {msg && <p className='animate-bounce'>{msg}</p>}
         <div className='bg-white h-[auto]  rounded-[1em] shadow-lg shadow-blue-600 '>
@@ -62,7 +63,12 @@ function Login() {
                         <label className='poppins text-[1rem] font-semibold' htmlFor="Password">Password</label>
                         <input onChange={e => setUserPass(e.target.value)} placeholder='Enter your password' className='w-full focus:outline-blue-600 rounded-[5px] border-blue-300 border-[1px] p-[.2em] poppins' type="password" name="pass" id="pass" />
                     </p>
-                    <p className='poppins text-blue-600'>Forgot Password?</p>
+                    <div className='flex justify-between'>
+                        <p className='poppins text-blue-600 hover:underline '>Forgot Password?</p>
+                        <Link to={"/register"}>
+                            <p className='poppins text-blue-600 hover:underline '>Create an account!</p>
+                        </Link>
+                    </div>
                     <button type="submit" className='bg-blue-600 p-[1em] py-[.7em] w-full text-white poppins font-bold rounded-[5px]' >Login</button>
                 </div>
             </form>

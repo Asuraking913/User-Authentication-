@@ -7,14 +7,12 @@ function Home() {
   const [msg, setMsg] = useState(false )
 
   useEffect(() => {
-    
-    console.log(localStorage.getItem("User"))
     setUser(localStorage.getItem("User"))
   }, [])
   
   return (
     <div className='flex justify-center items-center h-screen font-bold flex-col'>
-        <Nav />
+        <Nav loginLink={"/"} signLink={"/"}/>
         <div>
             <h1 className='text-[5rem] poppins text-blue-600'>Hey!! This is the home page</h1>
         </div>

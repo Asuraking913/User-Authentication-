@@ -33,7 +33,6 @@ function Reg() {
   return (
     <div>
         <div className='bg-blue-100 h-screen flex items-center justify-center  linear flex-col'>
-        <Nav />
         <h1 className='poppins capitalize text-blue-950 text-[1.5rem] font-bold mb-[1em]'>Create an Account</h1>
 
         {msg && <p className='text-blue-950 animate-bounce'>{msg}</p>}

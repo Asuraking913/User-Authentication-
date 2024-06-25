@@ -10,15 +10,17 @@ def root_route(app):
 	def home(): 
 		return "<h1>Oi!! This is the home page</h1>"
 	
-	@app.route("/show")
+	@app.route("/api/show", methods = ['POST'])
 	def show(): 
-		found_user = Users.query.all()[0]
+		# print(request.json['user'])
+		found_user = Users.query.filter_by(user_name = request.json['user']).first()
+		print(found_user, "hewrwe")
 		return {
 			"name": found_user.user_name,
 			"email" : found_user.user_email, 
-			"id" : found_user.id, 
-			"pass" : str(found_user.user_pass)
+			"id" : found_user.id
 		}
+		# return "sdf"
 			
 
 	@app.route("/api/register", methods = ['POST'])

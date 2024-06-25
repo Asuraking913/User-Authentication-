@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Nav() {
+function Nav({loginLink, signLink}) {
 
     const handleLogout = () => {
         localStorage.clear()
@@ -16,11 +16,14 @@ function Nav() {
                 <Link to={"/"}>
                     <li className='text-xl hover:scale-110 duration-[.5s] font-bold poppins text-white'>Home</li>
                 </Link>
-                <Link to={"/login"}>
+                <Link to={loginLink}>
                     <li className='text-xl hover:scale-110 duration-[.5s] font-bold poppins text-white'>Login In</li>
                 </Link>
-                <Link to={"/register"}>
+                <Link to={signLink}>
                     <li className='text-xl hover:scale-110 duration-[.5s] font-bold poppins text-white'>Sign In</li>
+                </Link>
+                <Link to={"/view"}>
+                    <li className='text-xl hover:scale-110 duration-[.5s] font-bold poppins text-white'>View Page</li>
                 </Link>
                 <li onClick={handleLogout} className='text-xl rounded-[1em] px-[1em] hover:scale-110 duration-[.5s] font-bold poppins text-blue-600 p-[.2em] bg-white'>Logout</li>
             </ul>
