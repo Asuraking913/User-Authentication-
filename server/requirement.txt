@@ -5,4 +5,4 @@ wtforms
 flask_bcrypt
 flask_session
 redis
-
+Flask-JWT-Extended

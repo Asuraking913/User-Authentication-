@@ -6,7 +6,6 @@ function View() {
 
     const [data, setData] =  useState(false)
     const [user, setUser] = useState(false)
-    
 
     const handleUser = async () => {
         const resp = await axios.get("/api/show").then(resp => {
@@ -17,7 +16,6 @@ function View() {
             }
         })
     }
-
 
     useEffect(() => {
     handleUser()
